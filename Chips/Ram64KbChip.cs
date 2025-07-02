@@ -1,9 +1,9 @@
 ﻿namespace Chips;
-public class ColorRamChip
+public class Ram64KbChip
 {
     Board board;
 
-    public ColorRamChip(Board board)
+    public Ram64KbChip(Board board)
     {
         this.board = board;
         Reset();
@@ -17,7 +17,7 @@ public class ColorRamChip
     {
     }
 
-    byte[] bytes = new byte[0x0400];
+    byte[] bytes = new byte[0x10000];
 
     public byte Address(ushort addr)
     {

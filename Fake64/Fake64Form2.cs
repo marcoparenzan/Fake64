@@ -1,25 +1,27 @@
 ﻿using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace Fake64;
 
-public partial class DoubleBufferControl : UserControl
+public partial class Fake64Form2 : Form
 {
-    public DoubleBufferControl()
+    public Fake64Form2(int w = 403, int h = 284)
     {
-        Init();
-    }
+        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+        this.StartPosition = FormStartPosition.CenterScreen;
+        this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        this.BackColor = System.Drawing.Color.White;
+        this.ClientSize = new System.Drawing.Size(w, h);
 
-    private void Init()
-    {
         this.DoubleBuffered = true;
         this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-        this.ClientSize = new System.Drawing.Size(403, 284);
-        Cursor.Hide();
+        //Cursor.Hide();
     }
 
     BufferedGraphics bufferedGraphics;
 
-    bool Suspended { get;  set; } = true;
+    bool Suspended { get; set; } = true;
 
     public Graphics g => bufferedGraphics.Graphics;
 
@@ -54,7 +56,6 @@ public partial class DoubleBufferControl : UserControl
             this.bufferedGraphics.Render(e.Graphics);
         }
     }
-
     unsafe internal void Render(Action<Bitmap, Rectangle> ab)
     {
         ab(bitmap, this.ClientRectangle);
